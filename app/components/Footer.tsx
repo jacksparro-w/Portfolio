@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   
   Mail,
@@ -9,6 +10,12 @@ import {
 } from "lucide-react";
 
 export default function Footer() {
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className="relative bg-slate-950 border-t border-white/10 pt-20 pb-10 px-6 overflow-hidden">
       {/* Background Glow */}
@@ -115,7 +122,7 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Copyright */}
           <p className="text-gray-500 text-sm text-center md:text-left">
-            © {new Date().getFullYear()} Brajin S J. All rights reserved.
+            © {year ?? ""} Brajin S J. All rights reserved.
           </p>
 
           {/* Scroll To Top */}
