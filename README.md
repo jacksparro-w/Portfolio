@@ -1,0 +1,34 @@
+# Brajin S J — The Engineer's Letter
+
+A vintage correspondence-themed developer portfolio built with Next.js, TypeScript, Tailwind CSS, GSAP, Framer Motion and Lenis.
+
+## Routes
+- `/` — Home / interactive envelope
+- `/about` — About and education
+- `/skills` — Technical notebook
+- `/experience` — Experience timeline
+- `/projects` — Project archive
+- `/contact` — Contact letter
+
+## Setup
+```bash
+npm install
+npm run dev
+```
+
+Open http://localhost:3000.
+
+## Phase 1 — Home
+- Added a generated vintage writing-desk background at `public/images/backgrounds/vintage-writing-desk.png`.
+- Refined the homepage envelope with parchment gradients, postal stamp, twine, and wax-seal styling.
+- Added a GSAP opening sequence: wax seal release, 3D envelope flap rotation, letter slide-out and letter-content reveal.
+- Added subtle floating dust and staged hero entrance animation.
+- Kept resume and contact actions connected to the existing routes.
+
+## Design references
+The six approved page references and combined asset atlas are stored in `public/design-references/`.
+
+## Notes
+- Contact details and project repository/demo URLs still need confirmation before launch.
+- The contact form is currently a visual prototype and needs a delivery integration.
+- Run `npm install`, `npm run lint`, and `npm run build` locally before deployment.

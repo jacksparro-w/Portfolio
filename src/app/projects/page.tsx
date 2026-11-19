@@ -1,0 +1,6 @@
+import { Paper } from "@/components/ui/Paper";
+import { projects } from "@/data/portfolio";
+import { Github, ExternalLink } from "lucide-react";
+export default function ProjectsPage() {
+  return <div className="page-wrap"><Paper className="projects-page"><div className="section-heading"><p className="script page-title">My Projects</p><p className="eyebrow">REAL-WORLD SOLUTIONS · FULL-STACK DEVELOPMENT · AI & DATA</p></div><div className="projects-grid">{projects.map(project => <article className="project-card" key={project.number}><div className="project-preview"><span>{project.number}</span><div className="preview-symbol">{project.number === "01" ? "⚖" : project.number === "02" ? "⌘" : project.number === "03" ? "✦" : "⌖"}</div></div><div className="project-info"><span className="project-number">{project.number}</span><h2>{project.title}</h2><p>{project.description}</p><div className="skill-tags">{project.stack.map(tag => <span key={tag}>{tag}</span>)}</div><div className="project-links"><span className="button button-small button-muted"><ExternalLink/> Demo link pending</span><span className="button button-small button-muted"><Github/> Repository pending</span></div></div></article>)}</div><p className="script more-projects">More Projects Coming Soon...</p></Paper></div>;
+}
