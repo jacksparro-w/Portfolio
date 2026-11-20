@@ -1,0 +1,120 @@
+﻿/* Scale the open folio with the desk, then rebind the pages vertically on mobile. */
+.site-shell:has(.about-scene) { max-width: none; padding: 0; }
+body:has(.about-scene) { background: #26140b url('/images/backgrounds/vintage-writing-desk.png') center / cover fixed; }
+body:has(.about-scene) .site-header { background: #201209db; }
+@media (min-width: 901px) {
+  body:has(.about-scene) .site-header { height: clamp(54px, 3.8vw, 72px); padding-inline: 8%; justify-content: flex-start; gap: 17vw; border: 0; box-shadow: none; }
+  body:has(.about-scene) .nav-link { padding-block: 14px; }
+  body:has(.about-scene) .nav-link::after { bottom: 3px; }
+}
+.about-scene {
+  --paper: url('/images/parchment-texture.jpg');
+  --drawing: url('/design-references/02-about.webp');
+  --hand: "Brush Script MT", "Segoe Script", "Apple Chancery", cursive;
+  max-width: 2000px;
+  margin: auto;
+  padding: 1vw 1.45vw 2.4vw;
+  color: #30180f;
+}
+.about-spread { position: relative; display: grid; grid-template-columns: 26% 74%; filter: drop-shadow(2px 9px 8px #100803bf); }
+.about-profile-page, .about-letter-page {
+  position: relative;
+  isolation: isolate;
+}
+.about-profile-page::before, .about-letter-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 0 0, #96532277, transparent 23%),
+    radial-gradient(ellipse at 100% 100%, #94521d66, transparent 27%),
+    var(--paper) center / cover;
+  background-color: var(--sheet-tint, #fff8e9);
+  background-blend-mode: multiply;
+  border-radius: 9px 5px 13px 4px / 5px 14px 5px 10px;
+  box-shadow: inset 0 0 2px 2px #835125, inset 0 0 10px 4px #b17a40,
+    inset 0 0 30px #a46f364f, 1px 3px #edcd98, -1px 5px #9c6938, 1px 7px #ce9f61;
+  filter: url("#about-paper-fibers");
+}
+.about-profile-page { --sheet-tint: #edc798; margin-top: 1.7vw; padding: 0 0 47%; text-align: center; transform: rotate(-.7deg); }
+.about-letter-page { padding: 2.15vw 2.2vw 2.8vw 3.45vw; transform: rotate(-.65deg); }
+.about-spine { position: absolute; z-index: 2; left: 26%; top: 17%; bottom: 17%; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+.about-spine span { width: 3.5vw; height: 1.1vw; margin-left: -50%; border-radius: 60% 60% 36% 36%; border: .35vw solid #815021; border-top-color: #dfa652; border-bottom-color: transparent; box-shadow: inset 0 2px 2px #401d08; transform: rotate(-4deg); }
+.about-spine span::before, .about-spine span::after { content: ""; position: absolute; z-index: -1; bottom: -.35vw; width: .65vw; height: .8vw; background: #482208; border-radius: 50%; }
+.about-spine span::before { left: -.4vw; } .about-spine span::after { right: -.4vw; }
+
+/* Artwork windows are measured in pixels on the supplied 1672 x 941 illustration. */
+.about-portrait-frame, .about-mountain-art, .about-sky, .about-rocket-doodle, .about-signoff {
+  aspect-ratio: var(--w) / var(--h);
+  background-image: var(--drawing);
+  background-size: calc(1672 / var(--w) * 100%) auto;
+  background-position: calc(var(--x) / (1672 - var(--w)) * 100%) calc(var(--y) / (941 - var(--h)) * 100%);
+  mask-image: linear-gradient(to right, transparent, black 5% 95%, transparent), linear-gradient(to bottom, transparent, black 5% 94%, transparent);
+  mask-composite: intersect;
+}
+.about-portrait-frame { --x: 37; --y: 98; --w: 374; --h: 339; width: 93%; margin: 0 auto; }
+.about-mountain-art { --x: 38; --y: 711; --w: 384; --h: 193; position: absolute; inset: auto 1% 0; }
+.about-sky { --x: 1246; --y: 60; --w: 341; --h: 161; position: absolute; right: 3%; top: .4%; width: 29%; }
+.about-rocket-doodle { --x: 1460; --y: 237; --w: 160; --h: 309; position: absolute; right: .45%; top: 21%; width: 14%; }
+.about-signoff { --x: 1034; --y: 715; --w: 584; --h: 160; margin-top: 1vw; }
+.about-name { font-size: clamp(1.9rem, 2.85vw, 3.6rem); font-weight: bold; line-height: 1.1; letter-spacing: .035em; }
+.about-role, .about-dear, .about-heading { font-family: var(--hand); }
+.about-role { font-size: clamp(1.5rem, 2vw, 2.6rem); line-height: 1.3; }
+.about-role::after, .about-heading::after, .about-quote::after { content: ""; display: block; width: 42%; height: .35em; margin: .12em auto 0; border-top: 2px solid #692719; border-radius: 50%; transform: rotate(-3deg); }
+.about-profile-links { display: grid; gap: .6em; margin: 1.6vw 8% 0 14%; text-align: left; font-size: clamp(1rem, 1.1vw, 1.4rem); line-height: 1.3; }
+.about-profile-links :is(a, span) { display: flex; align-items: center; gap: .9em; overflow-wrap: anywhere; }
+.about-profile-links svg { width: 1.2em; height: 1.2em; flex-shrink: 0; }
+.about-profile-links a:hover { text-decoration: underline; text-underline-offset: .18em; }
+.about-heading { position: relative; color: #711f16; font-size: clamp(2.2rem, 3.2vw, 4.3rem); line-height: 1.15; width: fit-content; max-width: 75%; }
+.about-heading::after { width: 58%; margin: .2em 0 0 5%; }
+.about-main-columns { display: grid; grid-template-columns: 44% 1fr; gap: 2.3%; }
+.about-story { font: italic 500 clamp(1rem, 1.26vw, 1.6rem)/1.29 Georgia, serif; }
+.about-story p { margin: 0 0 1em; }
+.about-story .about-dear { font-size: 1.6em; margin-bottom: .42em; }
+.about-quote, .about-details h2 { background: linear-gradient(110deg,#dda65b80,#f4dbac77,#d5a15c88), var(--paper) center / cover; clip-path: polygon(2% 3%,98% 0,100% 9%,99% 21%,100% 32%,99% 47%,100% 71%,99% 94%,2% 100%,0 91%,1% 68%,0 52%,1% 31%,0 16%); }
+.about-quote { padding: .7em 1em .32em; text-align: center; margin: 1em 1% 0 4%; font-weight: 600; font-size: 1.18em; transform: rotate(-1deg); }
+.about-quote span { color: #702816; font-size: 1.35em; line-height: 0; }
+.about-details { position: relative; margin-top: -.9vw; }
+.about-details h2 { display: inline-flex; align-items: center; gap: .4em; padding: .14em .85em; font: italic bold clamp(1.5rem, 1.9vw, 2.5rem)/1.2 Georgia, serif; }
+.about-details h2 svg { width: 1.25em; height: 1.25em; }
+.about-education-list { margin: 1.3vw 22% 2.15vw 8%; padding-left: 6%; border-left: 1px solid #87582e; font-size: clamp(1rem, 1.09vw, 1.4rem); line-height: 1.18; }
+.about-education-item { position: relative; margin-bottom: 1.05em; }
+.about-education-item h3 { font-weight: bold; }
+.education-dot { position: absolute; top: .25em; left: calc(-8.57% - .4em); width: .75em; height: .75em; border-radius: 50%; background: #603214; }
+.education-meta { display: flex; gap: .85em; align-items: center; flex-wrap: wrap; margin-top: .45em; font-size: .94em; }
+.education-meta b { background: #dfad69a8; padding: .12em .4em; border-radius: 3px; }
+.about-interest-grid { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: .8vw; }
+.about-interest { text-align: center; padding: 0 .2em; border-right: 1px solid #aa8055; font-size: clamp(.88rem, 1vw, 1.27rem); line-height: 1.13; }
+.about-interest:last-child { border: 0; }
+.about-interest svg { margin: 0 auto .45em; width: 2.1em; height: 2.1em; color: #643d1c; }
+.about-interest span { display: block; }
+@media (max-width: 1100px) {
+  .about-main-columns { grid-template-columns: 1fr; gap: 2rem; }
+  .about-spread { grid-template-columns: 32% 68%; }
+  .about-spine { left: 32%; }
+  .about-letter-page { padding: 2rem 5%; }
+  .about-sky { width: 23%; }
+  .about-heading { margin-bottom: 1rem; }
+  .about-rocket-doodle { display: none; }
+  .about-education-list { margin-right: 0; padding-left: 1.5rem; }
+  .education-dot { left: calc(-1.5rem - .4em); }
+  .about-mountain-art { bottom: auto; margin-top: .75rem; }
+  .about-signoff { max-width: 36rem; }
+}
+@media (max-width: 700px) {
+  .about-scene { padding: 12px 12px 24px; }
+  .about-spread { display: block; }
+  .about-profile-page { margin: 0; padding: .4rem 1rem min(46%, 14rem); transform: none; }
+  .about-portrait-frame { max-width: 300px; }
+  .about-profile-links { width: fit-content; margin: 1rem auto .4rem; }
+  .about-mountain-art { inset: auto 0 0; width: min(100%, 27rem); margin: auto; }
+  .about-spine { display: none; }
+  .about-letter-page { padding: 1.7rem 1.3rem; transform: none; }
+  .about-heading { max-width: 100%; font-size: 2.45rem; }
+  .about-sky { display: none; }
+  .about-story { line-height: 1.5; }
+  .about-education-list { margin: 1.2rem 0 2rem .7rem; }
+  .about-interest-grid { grid-template-columns: repeat(3, 1fr); row-gap: 1rem; margin-block: 1rem; }
+  .about-interest:nth-child(3) { border: 0; }
+}

@@ -32,3 +32,10 @@ The six approved page references and combined asset atlas are stored in `public/
 - Contact details and project repository/demo URLs still need confirmation before launch.
 - The contact form is currently a visual prototype and needs a delivery integration.
 - Run `npm install`, `npm run lint`, and `npm run build` locally before deployment.
+
+## Phase 2 — About
+- Rebuilt `/about` as a two-page vintage parchment journal based on `public/design-references/02-about.webp`.
+- Added a profile page with portrait artwork, name, role, location, GitHub and LinkedIn links.
+- Added the handwritten journey, education timeline, interest icons, signature and wax-seal detail.
+- Added staggered page/content entrance motion with reduced-motion support, while retaining the shared navigation and route transition.
+- Reused the Phase 1 vintage writing-desk background; added `public/images/about-journey-portrait.webp` as the framed portrait artwork cropped from the supplied About design reference.
