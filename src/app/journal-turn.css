@@ -1,0 +1,36 @@
+/* The browser captures the visible leaves, keeping the header in its own layer. */
+html[data-journal-turn] .site-header { view-transition-name: journal-navigation; }
+html[data-journal-turn]::view-transition { pointer-events: none; }
+html[data-journal-turn]::view-transition-group(root) { animation: none; perspective: 155vw; }
+html[data-journal-turn]::view-transition-image-pair(root) { isolation: isolate; }
+html[data-journal-turn]::view-transition-old(root),
+html[data-journal-turn]::view-transition-new(root) {
+  mix-blend-mode: normal; transform-origin: left center;
+  animation-duration: 840ms; animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(.42,.05,.18,1);
+}
+html[data-journal-turn="forward"]::view-transition-old(root) { z-index: 2; animation-name: leaf-out; }
+html[data-journal-turn="forward"]::view-transition-new(root) { animation-name: leaf-settle; }
+html[data-journal-turn="backward"]::view-transition-new(root) { z-index: 2; animation-name: leaf-out; animation-direction: reverse; }
+html[data-journal-turn="backward"]::view-transition-old(root) { animation-name: leaf-settle; animation-direction: reverse; }
+html[data-journal-turn]::view-transition-group(journal-navigation) { z-index: 3; animation: none; }
+html[data-journal-turn]::view-transition-old(journal-navigation) { display: none; }
+html[data-journal-turn]::view-transition-new(journal-navigation) { animation: none; mix-blend-mode: normal; }
+@keyframes leaf-out {
+  0% { transform: perspective(250vw) rotateY(0); box-shadow: 0 0 0 #26150900; }
+  25% { transform: perspective(250vw) translateX(-3%) rotateY(-22deg) skewY(-.4deg); box-shadow: 1rem .4rem 2rem #26150977; }
+  100% { transform: perspective(250vw) translateX(-4%) rotateY(-92deg) skewY(-1deg); box-shadow: 2rem 1rem 3rem #26150988; }
+}
+@keyframes leaf-settle { from { transform: translateX(2%) scale(.985); filter: brightness(.8); } to { transform: none; filter: brightness(1); } }
+@media (max-width: 740px) {
+  html[data-journal-turn]::view-transition-old(root),html[data-journal-turn]::view-transition-new(root) { animation-duration: 510ms; }
+  @keyframes leaf-out { from { transform: none; } to { transform: translateY(-103%) rotate(-1.2deg); box-shadow: 0 9px 22px #28150d80; } }
+  @keyframes leaf-settle { from { transform: translateY(3%); } to { transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-journal-turn]::view-transition-old(root),html[data-journal-turn]::view-transition-new(root) { animation-duration: 100ms; }
+  @keyframes leaf-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes leaf-settle { from { opacity: 1; } to { opacity: 1; } }
+}
+html:has(.site-shell) { overscroll-behavior-y: contain; }
+main.site-shell:focus:not(:focus-visible) { outline: none; }

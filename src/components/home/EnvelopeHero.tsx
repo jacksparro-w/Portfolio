@@ -6,7 +6,9 @@ import { Download, Send, ChevronDown, Feather, Orbit } from "lucide-react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 
- gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP);
+
+let openedDuringVisit = false;
 
 export function EnvelopeHero() {
   const root = useRef<HTMLDivElement>(null);
@@ -16,7 +18,16 @@ export function EnvelopeHero() {
   const copy = useRef<HTMLDivElement>(null);
   const [opened, setOpened] = useState(false);
 
-  useGSAP(() => {
+  const { contextSafe } = useGSAP(() => {
+    if (openedDuringVisit) {
+      setOpened(true);
+      gsap.set(seal.current, { opacity: 0 });
+      gsap.set(flap.current, { rotateX: 180, zIndex: 0, transformOrigin: "top center" });
+      gsap.set(letter.current, { y: -56, scale: 1.015, zIndex: 6, opacity: 1 });
+      gsap.set([".open-story", ".open-story-tether"], { opacity: 0 });
+      return;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
     intro
       .from(".envelope-stage", { y: 34, opacity: 0, duration: 1.05 })
@@ -44,8 +55,9 @@ export function EnvelopeHero() {
     });
   }, { scope: root });
 
-  const openLetter = () => {
+  const openLetter = contextSafe(() => {
     if (opened || !flap.current || !letter.current || !seal.current) return;
+    openedDuringVisit = true;
     setOpened(true);
 
     const tl = gsap.timeline({ defaults: { ease: "power3.inOut" } });
@@ -56,10 +68,11 @@ export function EnvelopeHero() {
       .to(letter.current, { y: -56, scale: 1.015, zIndex: 6, opacity: 1, duration: 0.9, ease: "power3.out" }, "-=0.18")
       .fromTo(".letter-reveal > *", { y: 12, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.12, duration: 0.45 }, "-=0.25")
       .to([".open-story", ".open-story-tether"], { y: 8, opacity: 0, duration: 0.25 }, "-=0.35");
-  };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) tl.progress(1);
+  });
 
   return (
-    <main ref={root} className="home-hero">
+    <div ref={root} className="home-hero">
       <span className="floating-dust dust-one" aria-hidden="true" />
       <span className="floating-dust dust-two" aria-hidden="true" />
       <span className="floating-dust dust-three" aria-hidden="true" />
@@ -87,7 +100,7 @@ export function EnvelopeHero() {
             <div className="envelope-fold" />
             <div className="envelope-flap" ref={flap} />
             <div className="envelope-twine" aria-hidden="true" />
-            <button ref={seal} className="wax-seal" onClick={openLetter} aria-label="Break the wax seal and open the letter"><span>B</span></button>
+            <button ref={seal} className="wax-seal" disabled={opened} onClick={openLetter} aria-label="Break the wax seal and open the letter"><span>B</span></button>
           </div>
           <div className="envelope-heading" aria-label="A Letter From An Aspiring Engineer, Brajin S J, Software Developer, Full Stack Developer and AI/ML Enthusiast">
             <p className="script">A Letter From An Aspiring Engineer</p>
@@ -120,6 +133,6 @@ export function EnvelopeHero() {
       <a className="scroll-cue" href="#next" aria-label="Scroll to explore">
         <span className="scroll-mouse"/><span>Scroll To Explore</span><ChevronDown size={17}/>
       </a>
-    </main>
+    </div>
   );
 }

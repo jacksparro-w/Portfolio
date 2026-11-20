@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./journal-turn.css";
 import { Navigation } from "@/components/layout/Navigation";
-import { SmoothScroll } from "@/components/animations/SmoothScroll";
+import { JournalController } from "@/components/animations/JournalController";
 
 export const metadata: Metadata = {
   title: "Brajin S J | Software Developer",
@@ -12,9 +13,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
-        <SmoothScroll />
+        <JournalController />
         <Navigation />
-        <div className="site-shell">{children}</div>
+        <main className="site-shell" tabIndex={-1}>{children}</main>
       </body>
     </html>
   );

@@ -1,0 +1,95 @@
+﻿body:has(.correspondence) {
+  background: #26150d url("/images/backgrounds/vintage-writing-desk.png") center / cover fixed;
+}
+.site-shell:has(.correspondence) { max-width: 1800px; padding: 0; }
+.correspondence {
+  container-type: inline-size;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 36.5% 63.5%;
+  color: #32170c;
+  background: #f6d39f;
+  font-family: Georgia, "Times New Roman", serif;
+}
+.correspondence::before, .correspondence::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("/design-references/06-contact.webp");
+}
+/* Sample blank stationery from the writing area underneath the illustrated frame. */
+.correspondence::before { background-size: 360% 1150%; background-position: 65% 59%; }
+.correspondence::after {
+  background-size: 100% 106.81%;
+  background-position: center bottom;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1672 881' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='4'/%3E%3C/filter%3E%3Cmask id='m'%3E%3Crect width='1672' height='881' fill='white'/%3E%3Cg filter='url(%23b)'%3E%3Cpath d='M138 208H551V443H138z M143 436H536V650H143z M148 642H382V703H148z M692 237H1407V560H692z M744 556H1351V637H744z'/%3E%3C/g%3E%3C/mask%3E%3C/defs%3E%3Crect width='1672' height='881' mask='url(%23m)'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+}
+.letter-intro { padding: 12.8cqw 4.4cqw 12cqw 9.2cqw; }
+.letter-intro > p { margin: 0 0 1.45cqw; font: italic 1.58cqw/1.24 Georgia, serif; }
+.letter-divider, .correspondence-submit { display: flex; align-items: center; justify-content: center; gap: 1em; }
+.letter-divider { margin: .8cqw 0; color: #642718; }
+.letter-divider::before, .letter-divider::after, .correspondence-submit::before, .correspondence-submit::after {
+  content: ""; height: 1px; flex: 1; background: linear-gradient(90deg, transparent, #704426);
+}
+.letter-divider::after, .correspondence-submit::after { transform: rotate(180deg); }
+.letter-intro address { display: grid; gap: .45em; font: normal 1.36cqw/1.4 Georgia, serif; }
+.letter-intro address :is(a,span) { display: flex; align-items: center; gap: .8em; overflow-wrap: anywhere; }
+.letter-intro address svg { width: 1.18em; flex: none; color: #570e09; }
+.letter-intro a:hover, .correspondence-feedback a { text-decoration: underline; }
+.letter-compose { padding: 14.9cqw 16.6cqw 15cqw 5.7cqw; }
+.correspondence-form { font-size: max(1.21cqw, 16px); }
+.correspondence-form fieldset { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.1cqw 1.55cqw; border: 0; padding: 0; margin: 0; min-width: 0; }
+.correspondence-field { position: relative; }
+.field-subject, .field-message { grid-column: 1 / -1; }
+.letter-field-icon { position: absolute; left: 1em; top: .69em; width: 1.25em; height: 1.25em; pointer-events: none; }
+.correspondence-field :is(input,textarea) {
+  display: block; width: 100%; padding: .65em .85em .65em 3.25em;
+  border: 1px solid #87572c; border-radius: .42em; background: #fff2cf33; color: #33190e; font: inherit; line-height: 1.2;
+}
+.correspondence-field textarea { height: 9.3cqw; min-height: 6em; resize: vertical; }
+.correspondence-field ::placeholder { color: #351c0f; opacity: 1; }
+.correspondence-field small { display: block; color: #741615; margin-top: .25em; }
+.correspondence-submit { margin: 1.4cqw 7.5% 0; }
+.correspondence-submit button {
+  display: inline-flex; align-items: center; justify-content: center; gap: .65em;
+  border: 1px solid #783d23; border-radius: .45em; background: #480c09;
+  color: #fff0ca; padding: .6em 1.8em; font: inherit; cursor: pointer;
+}
+.correspondence-submit button:hover { background: #671912; }
+.correspondence-submit button:disabled { cursor: wait; opacity: .75; }
+.correspondence-feedback p { margin: .65em 0 0; }
+.correspondence :focus-visible { outline: 2px solid #752229; outline-offset: 3px; }
+.correspondence-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (min-width: 901px) {
+  body:has(.correspondence) .site-header { height: clamp(48px,3.6vw,65px); padding-inline: 11.5% 25%; }
+  .correspondence { min-height: min(52.69vw,948.5px); }
+  /* The original ink lettering and signature are part of the desk illustration. */
+  .correspondence :is(h1,h2,.letter-signature-note) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+}
+@media (max-width: 900px) {
+  .site-shell:has(.correspondence) { padding: 12px; }
+  .correspondence { display: block; background: transparent; }
+  .correspondence::before, .correspondence::after { display: none; }
+  .letter-intro, .letter-compose {
+    padding: clamp(24px,6vw,50px); background: #f5d49e url("/images/parchment-texture.jpg") center / cover;
+    border: 1px solid #b7884d; box-shadow: inset 0 0 24px #945d3455, 0 4px 8px #190b0780;
+  }
+  .letter-intro { padding-bottom: 100px; position: relative; }
+  .letter-intro::after { content: ""; position: absolute; bottom: 4px; right: 5%; width: 72%; height: 90px; background: url("/images/contact/observatory.webp") right bottom / contain no-repeat; mix-blend-mode: multiply; }
+  .letter-compose { margin-top: 5px; position: relative; }
+  .letter-compose::before { content: ""; display: block; height: 55px; background: url("/images/contact/postmark.webp") right top / contain no-repeat; mix-blend-mode: multiply; }
+  .correspondence :is(h1,h2) { font-size: clamp(36px,7vw,58px); margin: 0 0 20px; color: #641913; line-height: 1.1; }
+  .letter-intro > p { font-size: 19px; margin-bottom: 16px; }
+  .letter-intro address { font-size: 17px; }
+  .letter-divider { margin: 20px 0; }
+  .correspondence-form fieldset { gap: 12px; }
+  .correspondence-field :is(input,textarea) { min-height: 44px; }
+  .correspondence-field textarea { height: 140px; }
+  .correspondence-submit { margin: 18px 0; }
+  .letter-signature-note { margin: 20px 0 0; padding: 15px 0; text-align: right; color: #641913; font-size: 25px; background: url("/images/contact/seal-and-pen.webp") left center / auto 100% no-repeat; }
+}
+@media (max-width: 520px) { .correspondence-form fieldset { grid-template-columns: 1fr; } }

@@ -1,0 +1,72 @@
+﻿.site-shell:has(.work-journal) { max-width: none; padding: 0; }
+body:has(.work-journal) {
+  background: #26160d url('/images/backgrounds/vintage-writing-desk.png') center / cover fixed;
+}
+.work-journal {
+  position: relative;
+  container-type: inline-size;
+  max-width: 2000px;
+  margin: auto;
+  aspect-ratio: 1672 / 876;
+  background: url('/images/experience/journal.webp') center / 100% 100% no-repeat;
+  color: #30170e;
+}
+.work-journal :is(h1, h2, p, blockquote, ol, ul) { margin: 0; }
+.work-timeline { padding: 0; list-style: none; }
+.work-entry { position: absolute; left: 40.2%; top: 26.3%; width: 39.5%; }
+.work-entry:nth-child(2) { left: 40.6%; top: 56.1%; }
+.work-entry h2 { color: #391710; font: bold italic 1.88cqw/1.15 Georgia, serif; }
+.work-date { display: flex; align-items: center; gap: .65em; }
+.work-entry .work-date { margin: .45cqw 0; font-size: 1.18cqw; }
+.work-date svg { width: 1.3em; height: 1.3em; }
+.work-date span {
+  padding: .14em .55em;
+  background: linear-gradient(105deg, #d8a765aa, #e9bf83dc 55%, #dca960a8);
+  border-radius: .18em;
+}
+.work-entry ul { padding-left: 1.9em; list-style: disc; width: 35.7cqw; font-size: 1.19cqw; line-height: 1.24; }
+.work-entry:nth-child(2) ul { width: 37cqw; }
+@media (min-width: 1051px) {
+  body:has(.work-journal) .site-header {
+    height: 3.91vw; padding-inline: 12%; justify-content: flex-start; gap: 9.6vw;
+    background: #1b100ae0; box-shadow: none; border: 0;
+  }
+  body:has(.work-journal) .nav-link { padding-block: .85vw; }
+  body:has(.work-journal) .nav-link::after { bottom: .22vw; }
+  /* The desktop artwork supplies the hand-lettered heading and quotation. */
+  .work-heading, .work-scrapbook {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%);
+  }
+}
+@media (max-width: 1050px) {
+  .work-journal {
+    aspect-ratio: auto; margin: .7rem; padding: clamp(1rem, 3.5vw, 2.25rem);
+    background: #efd0a2 url('/images/parchment-texture.jpg') center / cover;
+    border: 1px solid #98612e; box-shadow: 2px 5px 0 #86562d, 3px 9px 15px #170b07;
+  }
+  .work-heading { text-align: center; }
+  .work-heading h1 { color: #501c17; font-size: clamp(2.7rem, 8vw, 4rem); line-height: 1.15; }
+  .work-heading p { margin: .5rem 0 1.2rem; font-size: .87rem; letter-spacing: .16em; text-transform: uppercase; }
+  .work-scrapbook { display: flex; gap: clamp(.75rem, 4vw, 2rem); align-items: center; justify-content: center; margin: 0 auto 1.7rem; }
+  .work-photo { width: min(43%, 12rem); flex: none; aspect-ratio: 258 / 226; background: url('/images/experience/launch-photo.webp') center / cover; }
+  .work-scrapbook blockquote { max-width: 16ch; font-size: clamp(1.15rem, 3.6vw, 1.7rem); line-height: 1.3; text-align: center; }
+  .work-timeline { border-left: 2px solid #78431f; margin-left: .35rem; padding-left: 1rem; }
+  .work-timeline .work-entry {
+    position: relative; inset: auto; width: auto; margin-bottom: 1.25rem; padding: 1rem;
+    background: linear-gradient(110deg, #fff1d970, #e0aa6540), url('/images/parchment-texture.jpg') center / cover;
+    border: 1px solid #bc8a52; box-shadow: 1px 4px 5px #6d43174d;
+  }
+  .work-entry:last-child { margin-bottom: 0; }
+  .work-entry::before { content: ""; position: absolute; left: -1.36rem; top: 1.5rem; width: .55rem; height: .55rem; border-radius: 50%; background: #713c20; }
+  .work-entry h2 { display: flex; align-items: center; gap: .65rem; font-size: clamp(1.25rem, 3vw, 1.6rem); }
+  .work-entry h2::before { content: ""; width: 2.7rem; height: 2.25rem; background: url('/images/experience/technology-peak.webp') center / contain no-repeat; mix-blend-mode: multiply; flex: none; }
+  .work-entry:nth-child(2) h2::before { background-image: url('/images/experience/auction-gavel.webp'); }
+  .work-entry .work-date { margin: .7rem 0; font-size: .95rem; }
+  .work-timeline .work-entry ul { width: auto; font-size: 1rem; line-height: 1.45; padding-left: 1.2em; }
+  .work-entry li + li { margin-top: .25rem; }
+}
+@media (min-width: 1051px) {
+  .work-entry { font-family: "Times New Roman", serif; }
+  .work-entry h2 { font-family: inherit; font-size: 1.8cqw; white-space: nowrap; }
+  .work-entry ul { font-size: 1.18cqw; line-height: 1.18; }
+}

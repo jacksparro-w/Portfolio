@@ -29,8 +29,7 @@ Open http://localhost:3000.
 The six approved page references and combined asset atlas are stored in `public/design-references/`.
 
 ## Notes
-- Contact details and project repository/demo URLs still need confirmation before launch.
-- The contact form is currently a visual prototype and needs a delivery integration.
+- Contact details are maintained in `src/data/contact.ts` using the bundled resume.
 - Run `npm install`, `npm run lint`, and `npm run build` locally before deployment.
 
 ## Phase 2 — About
@@ -39,3 +38,11 @@ The six approved page references and combined asset atlas are stored in `public/
 - Added the handwritten journey, education timeline, interest icons, signature and wax-seal detail.
 - Added staggered page/content entrance motion with reduced-motion support, while retaining the shared navigation and route transition.
 - Reused the Phase 1 vintage writing-desk background; added `public/images/about-journey-portrait.webp` as the framed portrait artwork cropped from the supplied About design reference.
+
+## Contact letter delivery
+
+The form works without environment variables. It validates the letter and offers a populated email draft. The visitor sends that draft from their own email app.
+
+To enable direct delivery, configure `CONTACT_DELIVERY_URL` on the Next.js server with the HTTPS URL of your mail adapter. Optionally set `CONTACT_DELIVERY_TOKEN` for bearer authentication. The server action in `src/app/contact/actions.ts` posts JSON containing `to`, `name`, `email`, `subject`, and `message`. Use a verified sender at the provider, the visitor's email as Reply-To, and the supplied portfolio recipient. Apply provider-side spam and rate controls before enabling public direct delivery.
+
+The adapter must return HTTP 2xx with `{"accepted":true}` only after the provider accepts the letter. Timeouts, provider failures, and other responses keep the form contents and offer the email-app fallback.

@@ -1,5 +1,33 @@
-import { Paper } from "@/components/ui/Paper";
-import { Mail, Phone, Github, Linkedin, MapPin, Send, Rocket } from "lucide-react";
+﻿import type { Metadata } from "next";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { contact } from "@/data/contact";
+import { ContactForm } from "./ContactForm";
+import "./letter.css";
+
+export const metadata: Metadata = { title: "Contact | Brajin S J" };
+const icons = { Email: Mail, GitHub: Github, LinkedIn: Linkedin };
+
 export default function ContactPage() {
-  return <div className="page-wrap"><Paper className="contact-book"><aside className="contact-letter"><p className="script page-title">Let's Connect</p><p>Thank you for taking the time to explore my work and journey.</p><p>If you have an opportunity, a project idea, or simply want to discuss technology, AI, or space research, I'd be happy to connect!</p><div className="contact-details"><a href="mailto:YOUR_EMAIL@example.com"><Mail/> YOUR_EMAIL@example.com</a><span><Phone/> Add your phone number</span><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><Linkedin/> LinkedIn profile</a><a href="https://github.com/" target="_blank" rel="noreferrer"><Github/> GitHub profile</a><span><MapPin/> India</span></div><div className="mountain-sketch">⌁　⌁　⌁</div></aside><section className="contact-form-wrap"><p className="script page-title">Send Me a Message</p><form className="contact-form" action="mailto:YOUR_EMAIL@example.com" method="post" encType="text/plain"><div className="form-row"><label>Your Name<input name="name" placeholder="Your name" required/></label><label>Your Email<input type="email" name="email" placeholder="Your email" required/></label></div><label>Subject<input name="subject" placeholder="What would you like to discuss?" required/></label><label>Your Message<textarea name="message" rows={5} placeholder="Write your message..." required/></label><button className="button button-dark" type="submit"><Send/> Send Message</button></form><div className="contact-seal"><span>B</span></div><p className="script signoff">Best Regards,<br/>Brajin S J</p><Rocket className="contact-rocket"/></section></Paper></div>;
+  return <article className="correspondence">
+    <section className="letter-intro" aria-labelledby="letter-title">
+      <h1 id="letter-title" className="script">Let’s Connect</h1>
+      <p>Thank you for taking the time to explore my work and journey.</p>
+      <p>If you have an opportunity, a project idea, or simply want to discuss technology, AI, or space research, I’d be happy to connect!</p>
+      <div className="letter-divider" aria-hidden="true">✦</div>
+      <address>
+        {contact.links.map(({ href, label, text }) => {
+          const Icon = icons[label];
+          return <a href={href} key={label} {...(label !== "Email" && { target: "_blank", rel: "noopener noreferrer" })}>
+            <Icon aria-hidden="true" />{text}
+          </a>;
+        })}
+        <span><MapPin aria-hidden="true" />{contact.location}</span>
+      </address>
+    </section>
+    <section className="letter-compose" aria-labelledby="compose-title">
+      <h2 id="compose-title" className="script">Send Me a Message</h2>
+      <ContactForm />
+      <p className="letter-signature-note script">Best Regards,<br />Brajin S J</p>
+    </section>
+  </article>;
 }

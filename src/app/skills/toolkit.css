@@ -1,0 +1,65 @@
+﻿.site-shell:has(.toolkit) { max-width: none; padding: 0; }
+body:has(.toolkit) { background: #271509 url('/images/backgrounds/vintage-writing-desk.png') center / cover fixed; }
+.toolkit {
+  color: #321b0e;
+  container-type: inline-size;
+  position: relative;
+  max-width: 2000px;
+  margin: auto;
+  aspect-ratio: 1000 / 521;
+  background: url('/images/toolkit/notebook.webp') center / 100% 100%;
+}
+.toolkit h1, .toolkit h2, .toolkit p, .toolkit ul { margin: 0; }
+.toolkit ul { padding: 0; list-style: none; }
+.toolkit-intro { position: absolute; inset: 8% 78% auto 4%; text-align: center; }
+.toolkit-intro h1 { color: #501914; font-size: 4.7cqw; line-height: 1.2; white-space: nowrap; letter-spacing: -.06em; }
+.toolkit-intro p { position: absolute; top: 8.9cqw; font-size: 1.45cqw; font-style: italic; line-height: 1.24; }
+.toolkit-card { position: absolute; font-size: 1.11cqw; }
+.toolkit-card:nth-of-type(1) { left: 26.7%; top: 4.2%; width: 24.5%; }
+.toolkit-card:nth-of-type(2) { left: 53.3%; top: 4.2%; width: 40.8%; }
+.toolkit-card:nth-of-type(3) { left: 26.7%; top: 27%; width: 24.5%; }
+.toolkit-card:nth-of-type(4) { left: 53.3%; top: 27%; width: 21%; }
+.toolkit-card:nth-of-type(5) { left: 76.1%; top: 27%; width: 18.4%; }
+.toolkit-card:nth-of-type(6) { left: 26.3%; top: 49%; width: 20.4%; }
+.toolkit-card:nth-of-type(7) { left: 48.1%; top: 49%; width: 26.6%; }
+.toolkit-card:nth-of-type(8) { left: 76.2%; top: 49%; width: 18.5%; }
+.toolkit-card h2 { font: bold italic 1.38cqw/2.5cqw Georgia, serif; padding-left: 4.35cqw; }
+.toolkit-card ul { display: flex; justify-content: space-around; margin-top: .8cqw; }
+.toolkit-card li { flex: 1; min-width: 0; text-align: center; padding: 0 .3cqw; text-wrap: balance; line-height: 1.15; }
+.toolkit-symbol { display: block; width: 3.5cqw; aspect-ratio: 1; margin: 0 auto .15cqw; background: url('/images/toolkit/symbols.webp') no-repeat; background-size: 2700% 100%; background-position: calc(var(--index) * 100% / 26) center; mix-blend-mode: multiply; }
+.toolkit-card:nth-of-type(1) ul { display: grid; gap: .15cqw; padding: 0 1.2cqw; }
+.toolkit-card:nth-of-type(1) li { display: grid; grid-template-columns: 3.4cqw 5.8cqw 1fr; align-items: center; text-align: left; }
+.toolkit-card:nth-of-type(1) .toolkit-symbol { width: 2.9cqw; }
+.toolkit-rating { display: flex; align-items: center; gap: .6em; }
+.toolkit-rating meter { width: 8cqw; height: .85cqw; appearance: none; background: #daba8f; border: 1px solid #805c38; border-radius: 1em; overflow: hidden; }
+.toolkit-rating meter::-webkit-meter-bar { background: transparent; border: 0; }
+.toolkit-rating meter::-webkit-meter-optimum-value { background: #855730; }
+.toolkit-rating meter::-moz-meter-bar { background: #855730; }
+.toolkit-card:nth-of-type(4) li { display: grid; grid-template-columns: 4.7cqw auto; align-items: center; text-align: left; flex: none; }
+.toolkit-card:nth-of-type(4) .toolkit-symbol { grid-row: span 2; }
+.toolkit-note { position: absolute; top: 79%; left: 59.8%; transform: rotate(-3deg); font-size: 1.1cqw; }
+.toolkit-note li { margin: .28em 0; }
+.toolkit-note li::before { content: "☑"; margin-right: .6em; }
+@media (min-width: 981px) {
+  body:has(.toolkit) .site-header { height: 4.2vw; padding-inline: 8%; justify-content: flex-start; gap: 17vw; background: #1d100bd9; }
+  body:has(.toolkit) .nav-link { padding-block: .95vw; }
+  body:has(.toolkit) .nav-link::after { bottom: .35vw; }
+  .toolkit-note h2 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+}
+@media (max-width: 980px) {
+  .toolkit { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,19rem),1fr)); gap: 1.6rem 1rem; margin: 1rem; padding: clamp(1rem,3vw,2rem); aspect-ratio: auto; background: #efd3a4 url('/images/parchment-texture.jpg') center / cover; box-shadow: 0 6px 16px #180c08; }
+  .toolkit-intro { position: relative; inset: auto; grid-column: 1/-1; padding: 1rem min(32%,12rem) 1rem 0; min-height: 9rem; display: grid; align-content: center; }
+  .toolkit-intro::after { content: ""; position: absolute; inset: 0 0 0 68%; background: url('/images/toolkit/rocket-dish.webp') center / cover; mix-blend-mode: multiply; }
+  .toolkit-intro h1 { font-size: clamp(2.6rem,7vw,4rem); }
+  .toolkit-intro p { position: static; font-size: 1rem; margin: .5rem auto 0; max-width: 26rem; }
+  .toolkit .toolkit-card { position: static; width: auto; border: 1px solid #a98150; padding: 0 .65rem .9rem; font-size: 1rem; box-shadow: 1px 2px 3px #6e492533; background: #f9e5c250; }
+  .toolkit-card h2 { display: table; margin-top: -.65rem; padding: .2rem .6rem; background: #dfbb86; font-size: 1.12rem; line-height: 1.25; }
+  .toolkit .toolkit-card ul { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; padding: 0; margin-top: .75rem; }
+  .toolkit .toolkit-card li { flex: 1 0 4.2rem; }
+  .toolkit .toolkit-card .toolkit-symbol { width: 2.25rem; }
+  .toolkit .toolkit-card:has(meter) li { display: grid; grid-template-columns: 2.6rem 1fr auto; flex-basis: 100%; text-align: left; }
+  .toolkit-card:nth-of-type(4) .toolkit-symbol { grid-row: auto; }
+  .toolkit-rating meter { width: clamp(2rem,8vw,5rem); height: .7rem; }
+  .toolkit-note { position: static; transform: rotate(-1deg); grid-column: 1/-1; justify-self: center; background: #e2bf8c; box-shadow: 1px 3px 5px #80552966; padding: 1rem 1.5rem; font-size: 1rem; }
+  .toolkit-note h2 { font: italic 1.5rem Georgia, serif; margin-bottom: .5rem; }
+}
